@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Digital Divide: Social Media's Negative Impacts in 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- 
+        Infographic Narrative Plan:
+        1. Hero/Introduction: Hook with WEF #1 global risk (Misinformation).
+        2. The Pervasive Reach: Visualize social media usage statistics (youth, global).
+        3. Echoes & Bubbles: Illustrate how echo chambers and filter bubbles reinforce societal divides.
+        4. The Cognitive Toll: Show the impact on critical thinking and information quality.
+        5. Societal Fissures: Depict polarization trends and the spread of misinformation.
+        6. Youth Under Pressure: Focus on the heightened vulnerability and mental health impacts on young users.
+        7. Each section will use data and insights from the "Deep Research report" (f54e71f4-230c-4fe4-a0ad-484f98a44140).
+    -->
+    <!-- 
+        Visualization Choices & Justification (Confirming NO SVG, NO MERMAID JS):
+
+        Section: Hero/Introduction
+        - Data Point: Misinformation as top global risk (WEF).
+        - Goal: Inform.
+        - Visualization: Single Big Number with Unicode icon (⚠️).
+        - Justification: Immediate impact, establishes severity.
+        - Library/Method: HTML/Tailwind. NO SVG.
+
+        Section: The Pervasive Reach
+        - Data Point 1: 95% of 13-17 year-olds use social media.
+        - Goal: Inform.
+        - Visualization: Donut Chart.
+        - Justification: Clear proportion display.
+        - Library/Method: Chart.js (Canvas). NO SVG.
+        - Data Point 2: Teenagers: 3.5 hours/day on social media.
+        - Goal: Inform.
+        - Visualization: Single Big Number with Unicode icon (🕒).
+        - Justification: Highlights time commitment.
+        - Library/Method: HTML/Tailwind. NO SVG.
+        - Data Point 3: Global daily time spent: 2h 19m.
+        - Goal: Inform.
+        - Visualization: Single Big Number with Unicode icon (🌎).
+        - Justification: Shows global engagement.
+        - Library/Method: HTML/Tailwind. NO SVG.
+
+        Section: Echoes & Bubbles
+        - Data Point 1: ~0.35% users in echo chambers (Italian Twitter COVID-19 debate).
+        - Goal: Compare.
+        - Visualization: Bar Chart.
+        - Justification: Visualizes small proportion.
+        - Library/Method: Chart.js (Canvas). NO SVG.
+        - Data Point 2: Nearly 1/3 of retweets from these echo chambers.
+        - Goal: Inform.
+        - Visualization: Donut Chart.
+        - Justification: Shows disproportionate influence.
+        - Library/Method: Chart.js (Canvas). NO SVG.
+        - Data Point 3: Algorithmic shift of moderates.
+        - Goal: Organize/Show Process.
+        - Visualization: Simplified HTML/CSS Flow Diagram with Unicode arrows.
+        - Justification: Conceptual illustration.
+        - Library/Method: HTML/Tailwind. NO SVG, NO MERMAID JS.
+
+        Section: The Cognitive Toll
+        - Data Point 1: 75% news links shared without reading.
+        - Goal: Inform.
+        - Visualization: Donut Chart.
+        - Justification: Shows superficial engagement.
+        - Library/Method: Chart.js (Canvas). NO SVG.
+        - Data Point 2: Misinformation spreads 3x faster.
+        - Goal: Inform.
+        - Visualization: Pictograph with Unicode characters (⚡).
+        - Justification: Simple visual speed comparison.
+        - Library/Method: HTML/Tailwind. NO SVG.
+        - Data Point 3: AI confidence vs. Critical Thinking (inverse correlation).
+        - Goal: Show Relationship.
+        - Visualization: Simplified HTML/CSS Diagram (opposing arrows/text).
+        - Justification: Conceptual illustration.
+        - Library/Method: HTML/Tailwind. NO SVG.
+
+        Section: Societal Fissures
+        - Data Point 1: Trust in social media for news (Overall, Republicans, Democrats, Young Adults).
+        - Goal: Compare.
+        - Visualization: Bar Chart.
+        - Justification: Compares demographic trust levels.
+        - Library/Method: Chart.js (Canvas). NO SVG.
+        - Data Point 2: Monetary incentive for polarization.
+        - Goal: Organize/Show Process.
+        - Visualization: HTML/CSS Flow Diagram with Unicode characters (💰, →).
+        - Justification: Illustrates economic driver.
+        - Library/Method: HTML/Tailwind. NO SVG, NO MERMAID JS.
+
+        Section: Youth Under Pressure
+        - Data Point 1: >3hrs/day = double risk of mental health problems.
+        - Goal: Compare.
+        - Visualization: Bar Chart (Relative Risk).
+        - Justification: Clear risk comparison.
+        - Library/Method: Chart.js (Canvas). NO SVG.
+        - Data Point 2: Children 11-13 posting publicly: Depression/Anxiety symptoms.
+        - Goal: Compare.
+        - Visualization: Grouped Bar Chart.
+        - Justification: Direct comparison of groups on multiple metrics.
+        - Library/Method: Chart.js (Canvas). NO SVG.
+
+        Confirmation: NEITHER Mermaid JS NOR SVG were used anywhere in this output. All diagrams and icons are achieved using HTML, CSS (Tailwind), Unicode characters, or Canvas-based rendering via Chart.js.
+    -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0A2F51; /* Primary Dark */
+            color: #F0F8FF; /* Neutral Text (AliceBlue) */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px; /* Adjusted for better fit in cards */
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px; 
+            max-height: 350px;
+        }
+        .stat-card {
+            background-color: #0E4D64; /* Primary Medium */
+            border: 1px solid #1282A2; /* Accent Blue for border */
+        }
+        .stat-highlight {
+            color: #FFA500; /* Highlight/Warning */
+            font-weight: 700;
+        }
+        .section-title {
+            color: #BDE0FE; /* Light Accent */
+        }
+        .flow-box {
+            background-color: #1282A2; /* Accent Blue */
+            color: #F0F8FF;
+            border: 1px solid #BDE0FE;
+        }
+        .flow-arrow {
+            color: #BDE0FE;
+        }
+        /* Custom tooltip styling for Chart.js (optional, can extend default) */
+        .chartjs-tooltip {
+            background: rgba(14, 77, 100, 0.9); /* Primary Medium with alpha */
+            border-radius: 0.375rem;
+            color: white;
+            opacity: 1;
+            pointer-events: none;
+            position: absolute;
+            transform: translate(-50%, 0);
+            transition: all .1s ease;
+            padding: 0.5rem;
+            z-index: 100;
+        }
+        .chartjs-tooltip-key {
+            display: inline-block;
+            height: 10px;
+            margin-right: 5px;
+            width: 10px;
+        }
+        h1, h2, h3 {
+            color: #BDE0FE; /* Light Accent for headings */
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="container mx-auto px-4 py-8">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold mb-2">More subtle than it seems</h1>
+            <p class="text-xl md:text-2xl text-[#BDE0FE]">Social Media's Negative Impacts in 2025</p>
+            <p class="text-md text-[#F0F8FF] max-w-3xl mx-auto mt-4">Based on findings from recent academic studies and industry reports, this infographic explores the critical challenges posed by social media, from its pervasive reach to its effects on cognition and societal cohesion.</p>
+        </header>
+
+        <section class="mb-16">
+            <div class="stat-card rounded-lg shadow-xl p-6 md:p-8 text-center">
+                <h2 class="text-2xl font-semibold section-title mb-4">A Looming Global Challenge</h2>
+                <p class="text-lg mb-4">The World Economic Forum's 2025 Global Risks Report identifies a critical threat amplified by the digital age:</p>
+                <div class="text-6xl md:text-7xl font-bold stat-highlight my-6">
+                    ⚠️ #1
+                </div>
+                <p class="text-2xl font-semibold mb-2">Misinformation & Disinformation</p>
+                <p class="text-lg">Designated as the <span class="stat-highlight">top global risk</span> for the immediate term, threatening political cohesion and societal trust.</p>
+            </div>
+        </section>
+
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8 section-title">The Pervasive Reach of Social Media</h2>
+            <p class="text-center text-lg mb-10 max-w-2xl mx-auto">Social media's integration into daily life is nearly absolute, particularly among younger demographics, leading to unprecedented levels of engagement and exposure.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="stat-card rounded-lg shadow-xl p-6 flex flex-col items-center text-center">
+                    <h3 class="text-xl font-semibold mb-3">Youth Adoption Rate</h3>
+                    <div class="chart-container h-64 max-h-64">
+                        <canvas id="youthAdoptionChart"></canvas>
+                    </div>
+                    <p class="mt-4 text-lg">Up to <span class="stat-highlight">95%</span> of individuals aged 13-17 use at least one social media platform.</p>
+                </div>
+                <div class="stat-card rounded-lg shadow-xl p-6 flex flex-col items-center text-center justify-center">
+                    <h3 class="text-xl font-semibold mb-3">Teens' Daily Engagement</h3>
+                    <div class="text-6xl font-bold stat-highlight my-4">🕒 3.5</div>
+                    <p class="text-2xl">Hours Per Day</p>
+                    <p class="mt-4 text-lg">Average time teenagers spend on social media daily, with one-third using it "almost constantly."</p>
+                </div>
+                <div class="stat-card rounded-lg shadow-xl p-6 flex flex-col items-center text-center justify-center">
+                    <h3 class="text-xl font-semibold mb-3">Global Daily Usage</h3>
+                     <div class="text-6xl font-bold stat-highlight my-4">🌎 2h 19m</div>
+                    <p class="text-2xl">Average Time</p>
+                    <p class="mt-4 text-lg">The average global daily time spent on social media platforms by users across all demographics in 2024/2025.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8 section-title">Echo Chambers & Filter Bubbles: Reinforcing Divides</h2>
+            <p class="text-center text-lg mb-10 max-w-2xl mx-auto">Algorithmic curation and user tendencies create personalized information environments that can limit exposure to diverse viewpoints, fostering ideological homogeneity and polarization.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="stat-card rounded-lg shadow-xl p-6">
+                    <h3 class="text-xl font-semibold mb-3 text-center">The Amplification Power of Niche Echoes</h3>
+                    <p class="mb-4 text-sm text-center">(Italian Twitter COVID-19 Debate Case Study)</p>
+                    <div class="chart-container h-72">
+                        <canvas id="echoChamberUsersChart"></canvas>
+                    </div>
+                    <p class="mt-4 text-center text-lg">Though users in echo chambers represented only <span class="stat-highlight">~0.35%</span>, they were responsible for nearly <span class="stat-highlight">a third</span> of all retweets, showcasing disproportionate influence.</p>
+                </div>
+                <div class="stat-card rounded-lg shadow-xl p-6">
+                     <h3 class="text-xl font-semibold mb-3 text-center">Algorithmic Influence on Moderates</h3>
+                     <p class="mb-4 text-center">Algorithmic News Recommenders (NRS) biased towards user preferences can shift politically moderate individuals.</p>
+                     <div class="flex flex-col items-center space-y-4 mt-8 p-4">
+                        <div class="flow-box p-3 rounded-md text-center w-full max-w-xs">Politically Moderate Individual</div>
+                        <div class="text-4xl flow-arrow">↓</div>
+                        <div class="flow-box p-3 rounded-md text-center w-full max-w-xs">Algorithmic News Feed (Biased)</div>
+                        <div class="text-4xl flow-arrow">↓</div>
+                        <div class="flow-box p-3 rounded-md text-center w-full max-w-xs stat-highlight">Increased Ideological Polarization</div>
+                     </div>
+                     <p class="mt-4 text-center text-sm">This suggests algorithms actively contribute to ideological divides, not just reinforcing strong pre-existing beliefs.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8 section-title">The Cognitive Toll: Critical Thinking & Information Quality</h2>
+            <p class="text-center text-lg mb-10 max-w-2xl mx-auto">The digital environment, coupled with AI reliance, is impacting cognitive abilities and fostering the spread of low-quality information through superficial engagement.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="stat-card rounded-lg shadow-xl p-6 flex flex-col items-center text-center">
+                    <h3 class="text-xl font-semibold mb-3">"Shares Without Clicks"</h3>
+                    <div class="chart-container h-64 max-h-64">
+                        <canvas id="sharesWithoutClicksChart"></canvas>
+                    </div>
+                    <p class="mt-4 text-lg"><span class="stat-highlight">75%</span> of news links on Facebook are shared without the user ever reading the content, driven by headlines and partisan bias.</p>
+                </div>
+                <div class="stat-card rounded-lg shadow-xl p-6 flex flex-col items-center text-center justify-center">
+                    <h3 class="text-xl font-semibold mb-3">The Speed of Misinformation</h3>
+                    <div class="text-5xl my-6">
+                        <span class="stat-highlight">⚡⚡⚡</span> <span class="text-2xl mx-2">vs</span> <span>⚡</span>
+                    </div>
+                    <p class="text-lg">Misinformation spreads at least <span class="stat-highlight">three times faster</span> than true information on social media platforms.</p>
+                </div>
+                <div class="stat-card rounded-lg shadow-xl p-6 flex flex-col items-center text-center">
+                    <h3 class="text-xl font-semibold mb-3">AI Confidence vs. Critical Thinking</h3>
+                    <p class="text-lg mt-4">Studies show an <span class="stat-highlight">inverse correlation</span>:</p>
+                    <div class="my-6 text-center">
+                        <p class="text-xl p-2 flow-box rounded w-full">Higher AI Confidence <span class="flow-arrow mx-2">→</span> Lower Critical Thinking</p>
+                        <p class="text-xl p-2 flow-box rounded w-full mt-2">Higher Self-Confidence <span class="flow-arrow mx-2">→</span> Higher Critical Thinking</p>
+                    </div>
+                    <p class="text-sm">Younger users (17-25) show higher AI dependence and lower critical thinking scores, pointing to "cognitive offloading."</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8 section-title">Societal Fissures: Polarization & The Misinformation Machine</h2>
+            <p class="text-center text-lg mb-10 max-w-2xl mx-auto">Social media platforms act as catalysts for polarization and misinformation, driven by algorithmic design and economic incentives, posing a severe threat to societal cohesion.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="stat-card rounded-lg shadow-xl p-6">
+                    <h3 class="text-xl font-semibold mb-3 text-center">Shifting Trust: Social Media as a News Source (USA, 2025)</h3>
+                    <div class="chart-container h-80">
+                        <canvas id="trustInSocialMediaChart"></canvas>
+                    </div>
+                    <p class="mt-4 text-center text-sm">Trust in social media for news is rising, especially among Republicans and younger adults, deepening partisan information silos.</p>
+                </div>
+                 <div class="stat-card rounded-lg shadow-xl p-6 flex flex-col justify-center">
+                    <h3 class="text-xl font-semibold mb-3 text-center">The Polarization Profit Model</h3>
+                    <p class="mb-4 text-center">Conflict and outrage are highly effective at generating engagement, which translates to platform revenue.</p>
+                    <div class="flex flex-col items-center space-y-3 mt-6 p-3 text-sm md:text-base">
+                        <div class="flow-box p-3 rounded-md text-center w-full max-w-md">Divisive/Outrageous Content Amplified</div>
+                        <div class="text-3xl flow-arrow">↓</div>
+                        <div class="flow-box p-3 rounded-md text-center w-full max-w-md">Increased User Engagement (Clicks, Shares, Time)</div>
+                        <div class="text-3xl flow-arrow">↓</div>
+                        <div class="flow-box p-3 rounded-md text-center w-full max-w-md">Higher Advertising Revenue for Platforms <span class="stat-highlight ml-1">💰</span></div>
+                    </div>
+                    <p class="mt-4 text-center text-sm">This structural incentive inherently predisposes platforms to amplify content that can lead to polarization and misinformation.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-center mb-8 section-title">Youth Under Pressure: A Magnified Vulnerability</h2>
+            <p class="text-center text-lg mb-10 max-w-2xl mx-auto">Young people are disproportionately affected by social media's downsides, facing significant mental health risks and cognitive challenges due to high exposure and developmental stage.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="stat-card rounded-lg shadow-xl p-6">
+                    <h3 class="text-xl font-semibold mb-3 text-center">Usage Time & Mental Health Risk</h3>
+                     <p class="mb-4 text-sm text-center">Children and adolescents spending >3 hours/day on social media face:</p>
+                    <div class="chart-container h-72">
+                        <canvas id="youthMentalHealthRiskChart"></canvas>
+                    </div>
+                     <p class="mt-4 text-center text-lg"><span class="stat-highlight">Double the risk</span> of mental health problems (depression, anxiety).</p>
+                </div>
+                <div class="stat-card rounded-lg shadow-xl p-6">
+                    <h3 class="text-xl font-semibold mb-3 text-center">Impact of Public Posting (Ages 11-13)</h3>
+                    <p class="mb-4 text-sm text-center">Children posting publicly are more likely to report moderate/severe symptoms:</p>
+                    <div class="chart-container h-80">
+                        <canvas id="publicPostingImpactChart"></canvas>
+                    </div>
+                    <p class="mt-4 text-center text-sm">Also experience increased sleep issues. Problematic use often mirrors addiction characteristics.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center mt-16 pt-8 border-t border-[#1282A2]">
+            <p class="text-sm text-[#BDE0FE]">Infographic based on the "Deep Research report" (f54e71f4-230c-4fe4-a0ad-484f98a44140) concerning the negative impacts of social media in 2025.</p>
+            <p class="text-xs text-[#0E4D64] mt-2">Data extracted and visualized for educational and awareness purposes. All statistics are as reported in the source material for 2024/2025 projections and findings.</p>
+        </footer>
+
+    </div>
+
+    <script>
+        const FONT_COLOR = '#F0F8FF'; // AliceBlue for text on dark backgrounds
+        const GRID_COLOR = '#0E4D64'; // Primary Medium for grid lines (darker than Accent Blue)
+        const ACCENT_BLUE = '#1282A2';
+        const LIGHT_ACCENT_BLUE = '#BDE0FE';
+        const HIGHLIGHT_ORANGE = '#FFA500';
+
+        function wrapLabel(str, maxWidth) {
+            if (str.length <= maxWidth) {
+                return str;
+            }
+            const words = str.split(' ');
+            const lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if (currentLine.length + words[i].length + 1 <= maxWidth) {
+                    currentLine += ' ' + words[i];
+                } else {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines;
+        }
+
+        const tooltipTitleCallback = function(tooltipItems) {
+            const item = tooltipItems[0];
+            let label = item.chart.data.labels[item.dataIndex];
+            if (Array.isArray(label)) {
+                return label.join(' ');
+            } else {
+                return label;
+            }
+        };
+
+        const commonChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: FONT_COLOR,
+                        font: { size: 12 }
+                    }
+                },
+                tooltip: {
+                    enabled: true,
+                    backgroundColor: 'rgba(10, 47, 81, 0.9)', // Primary Dark with alpha
+                    titleColor: LIGHT_ACCENT_BLUE,
+                    bodyColor: FONT_COLOR,
+                    borderColor: ACCENT_BLUE,
+                    borderWidth: 1,
+                    padding: 10,
+                    callbacks: {
+                        title: tooltipTitleCallback
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    ticks: { color: FONT_COLOR, font: { size: 10 } },
+                    grid: { color: GRID_COLOR }
+                },
+                x: {
+                    ticks: { color: FONT_COLOR, font: { size: 10 } },
+                    grid: { color: GRID_COLOR }
+                }
+            }
+        };
+        
+        const commonPieDonutOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        color: FONT_COLOR,
+                        font: {size: 12},
+                        padding:10
+                    }
+                },
+                tooltip: {
+                    enabled: true,
+                    backgroundColor: 'rgba(10, 47, 81, 0.9)',
+                    titleColor: LIGHT_ACCENT_BLUE,
+                    bodyColor: FONT_COLOR,
+                    borderColor: ACCENT_BLUE,
+                    borderWidth: 1,
+                    padding: 10,
+                    callbacks: {
+                       label: function(context) {
+                            let label = context.label || '';
+                            if (label) {
+                                label += ': ';
+                            }
+                            if (context.parsed !== null) {
+                                label += context.parsed + '%';
+                            }
+                            return label;
+                        }
+                    }
+                }
+            }
+        };
+
+
+        // Chart 1: Youth Adoption Rate
+        const youthAdoptionCtx = document.getElementById('youthAdoptionChart')?.getContext('2d');
+        if (youthAdoptionCtx) {
+            new Chart(youthAdoptionCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Use Social Media (13-17 yrs)', 'Do Not Use'],
+                    datasets: [{
+                        label: 'Youth Adoption Rate',
+                        data: [95, 5],
+                        backgroundColor: [ACCENT_BLUE, '#0A2F51'],
+                        borderColor: [LIGHT_ACCENT_BLUE, GRID_COLOR],
+                        borderWidth: 1
+                    }]
+                },
+                options: { ...commonPieDonutOptions }
+            });
+        }
+
+        // Chart 2: Echo Chamber Users & Retweets (Illustrative, simplified data for 2 charts)
+        const echoChamberUsersCtx = document.getElementById('echoChamberUsersChart')?.getContext('2d');
+        if (echoChamberUsersCtx) {
+            new Chart(echoChamberUsersCtx, {
+                type: 'bar',
+                data: {
+                    labels: [wrapLabel('Echo Chamber Users',16), wrapLabel('Their Share of Retweets',16)],
+                    datasets: [{
+                        label: 'Proportion',
+                        data: [0.35, 33.3], // 0.35% users, ~33.3% retweets (1/3)
+                        backgroundColor: [ACCENT_BLUE, HIGHLIGHT_ORANGE],
+                        borderColor: [LIGHT_ACCENT_BLUE, LIGHT_ACCENT_BLUE],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    ...commonChartOptions,
+                    scales: {
+                        y: { ...commonChartOptions.scales.y, beginAtZero: true, title: { display: true, text: '%', color: FONT_COLOR}},
+                        x: { ...commonChartOptions.scales.x }
+                    },
+                     plugins: {
+                        ...commonChartOptions.plugins,
+                        tooltip: {
+                            ...commonChartOptions.plugins.tooltip,
+                            callbacks: {
+                                title: tooltipTitleCallback,
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    label += context.parsed.y + '%';
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Chart 3: Shares Without Clicks
+        const sharesWithoutClicksCtx = document.getElementById('sharesWithoutClicksChart')?.getContext('2d');
+        if (sharesWithoutClicksCtx) {
+            new Chart(sharesWithoutClicksCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Shared Without Reading', 'Shared After Reading (Assumed)'],
+                    datasets: [{
+                        label: 'News Link Sharing Behavior',
+                        data: [75, 25],
+                        backgroundColor: [HIGHLIGHT_ORANGE, ACCENT_BLUE],
+                        borderColor: [LIGHT_ACCENT_BLUE, LIGHT_ACCENT_BLUE],
+                        borderWidth: 1
+                    }]
+                },
+                options: { ...commonPieDonutOptions }
+            });
+        }
+
+        // Chart 4: Trust in Social Media for News
+        const trustInSocialMediaCtx = document.getElementById('trustInSocialMediaChart')?.getContext('2d');
+        if (trustInSocialMediaCtx) {
+            new Chart(trustInSocialMediaCtx, {
+                type: 'bar',
+                data: {
+                    labels: [
+                        wrapLabel('Overall US Adults', 16), 
+                        wrapLabel('Republicans', 16), 
+                        wrapLabel('Democrats', 16), 
+                        wrapLabel('Adults 18-29', 16)
+                    ],
+                    datasets: [{
+                        label: '% Trusting Social Media for News (At least some trust)',
+                        data: [45, 45, 38, 54],
+                        backgroundColor: [ACCENT_BLUE, '#FF6384', '#36A2EB', HIGHLIGHT_ORANGE], // Different colors for political groups
+                        borderColor: LIGHT_ACCENT_BLUE,
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    ...commonChartOptions,
+                     indexAxis: 'y', 
+                     scales: {
+                        y: { ...commonChartOptions.scales.y, ticks: {...commonChartOptions.scales.y.ticks, font: {size: 10}}},
+                        x: { ...commonChartOptions.scales.x, beginAtZero: true, max: 60, title: { display: true, text: '% Trusting', color: FONT_COLOR}}
+                    },
+                    plugins: {
+                        ...commonChartOptions.plugins,
+                        tooltip: {
+                            ...commonChartOptions.plugins.tooltip,
+                             callbacks: {
+                                title: tooltipTitleCallback,
+                                label: function(context) { return context.dataset.label + ': ' + context.parsed.x + '%';}
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Chart 5: Youth Mental Health Risk (>3hrs vs <3hrs)
+        const youthMentalHealthRiskCtx = document.getElementById('youthMentalHealthRiskChart')?.getContext('2d');
+        if (youthMentalHealthRiskCtx) {
+            new Chart(youthMentalHealthRiskCtx, {
+                type: 'bar',
+                data: {
+                    labels: [wrapLabel('Risk for <3hrs Users', 16), wrapLabel('Risk for >3hrs Users', 16)],
+                    datasets: [{
+                        label: 'Relative Risk of Mental Health Problems',
+                        data: [1, 2], // Representing 1x vs 2x risk
+                        backgroundColor: [ACCENT_BLUE, HIGHLIGHT_ORANGE],
+                        borderColor: [LIGHT_ACCENT_BLUE, LIGHT_ACCENT_BLUE],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    ...commonChartOptions,
+                    scales: {
+                        y: { ...commonChartOptions.scales.y, beginAtZero: true, max: 2.5, title: { display: true, text: 'Relative Risk Factor', color: FONT_COLOR}},
+                        x: { ...commonChartOptions.scales.x }
+                    },
+                     plugins: {
+                        ...commonChartOptions.plugins,
+                         tooltip: {
+                            ...commonChartOptions.plugins.tooltip,
+                            callbacks: {
+                                title: tooltipTitleCallback,
+                                label: function(context) { return 'Relative Risk: ' + context.parsed.y + 'x';}
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Chart 6: Impact of Public Posting (Ages 11-13)
+        const publicPostingImpactCtx = document.getElementById('publicPostingImpactChart')?.getContext('2d');
+        if (publicPostingImpactCtx) {
+            new Chart(publicPostingImpactCtx, {
+                type: 'bar',
+                data: {
+                    labels: [wrapLabel('Moderate/Severe Depression Symptoms', 20), wrapLabel('Moderate/Severe Anxiety Symptoms', 20)],
+                    datasets: [
+                        {
+                            label: 'Post Publicly',
+                            data: [54, 50],
+                            backgroundColor: HIGHLIGHT_ORANGE,
+                            borderColor: LIGHT_ACCENT_BLUE,
+                            borderWidth: 1
+                        },
+                        {
+                            label: 'Never/Rarely Post',
+                            data: [25, 24],
+                            backgroundColor: ACCENT_BLUE,
+                            borderColor: LIGHT_ACCENT_BLUE,
+                            borderWidth: 1
+                        }
+                    ]
+                },
+                options: {
+                    ...commonChartOptions,
+                    scales: {
+                        y: { ...commonChartOptions.scales.y, beginAtZero: true, max: 60, title: { display: true, text: '% Reporting Symptoms', color: FONT_COLOR}},
+                        x: { ...commonChartOptions.scales.x, ticks: {...commonChartOptions.scales.x.ticks, font: {size: 9}}}
+                    },
+                    plugins: {
+                        ...commonChartOptions.plugins,
+                        tooltip: {
+                             ...commonChartOptions.plugins.tooltip,
+                            callbacks: {
+                                title: tooltipTitleCallback,
+                                label: function(context) { return context.dataset.label + ': ' + context.parsed.y + '%';}
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+    </script>
+</body>
+</html>
+
